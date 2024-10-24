@@ -3,27 +3,59 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using Facebook.Unity;
+using System;
 
-public class LoginModule
+namespace Assets.Platform.Scripts.Login
 {
-    public bool guest, facebook, google, gameCenter;
+    public enum LoginTypeEnum { Guest, Facebook, Google, GameCenter }
 
-    public LoginModule() 
+    [Serializable]
+    public class LoginModule
     {
-        guest = true;
-    }
+        public bool guest, facebook, google, gameCenter;
 
-    public void Init()
-    {
-        if (guest)
+        public const string LOGIN_TYPE_KEY = "LoginTypeKey";
+        public static LoginTypeEnum LoginType
         {
-            // perform Guest operation
+            get
+            {
+                return (LoginTypeEnum)PlayerPrefs.GetInt(LOGIN_TYPE_KEY);
+            }
+
+            set
+            {
+                PlayerPrefs.GetInt(LOGIN_TYPE_KEY, (int)value);
+            }
         }
 
-        if (facebook)
+        public LoginModule()
         {
-            FB.Init();
+            guest = true;
         }
-    }
 
+        public void Init()
+        {
+            if (guest)
+            {
+                // perform Guest operation
+            }
+
+            if (facebook)
+                FB.Init();
+
+        }
+
+        public bool IsInitialized()
+        {
+            bool state = true;
+
+            if (facebook)
+            {
+                state &= FB.IsInitialized;
+            }
+
+            return state;
+        }
+
+    }
 }

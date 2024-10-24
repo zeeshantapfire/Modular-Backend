@@ -59,6 +59,8 @@ namespace Assets.Platform.Scripts.Login
             this.SessionTicket = result.SessionTicket;
             this.PlayFabId = result.PlayFabId;
 
+            LoginModule.LoginType = LoginTypeEnum.Guest;
+
             print($"{GetType()} : Login Successful");
             OnSuccessEvent?.Invoke();
         }

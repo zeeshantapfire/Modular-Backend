@@ -9,7 +9,7 @@ using UnityEngine.UI;
 
 namespace Assets.Platform.Scripts.Login
 {
-    public enum LoginTypeEnum { Silent, Facebook, Google, Email, GameCenter }
+    
 
     public class LoginSystem : MonoBehaviour
     {
@@ -17,19 +17,6 @@ namespace Assets.Platform.Scripts.Login
 
         public string SessionTicket { get; protected set; }
         public string PlayFabId { get; protected set; }   
-
-        private const string AUTH_PREF_KEY = "AuthKey";
-        public string AuthKey
-        {
-            get
-            {
-                return PlayerPrefs.GetString(AUTH_PREF_KEY);
-            }
-            set
-            {
-                PlayerPrefs.SetString(AUTH_PREF_KEY, value);
-            }
-        }
 
         private const string LOGIN_PREF_KEY = "LoginType";
         public LoginTypeEnum LoginType

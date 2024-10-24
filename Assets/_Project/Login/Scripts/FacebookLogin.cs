@@ -8,6 +8,7 @@ using UnityEngine.UI;
 using UnityEditor.Events;
 using UnityEngine.Events;
 using System.Net.NetworkInformation;
+using Facebook.Unity;
 
 namespace Assets.Platform.Scripts.Login
 {
@@ -36,12 +37,34 @@ namespace Assets.Platform.Scripts.Login
             }
         }
 
+        private const string AUTH_PREF_KEY = "AuthKey";
+        public string AuthToken
+        {
+            get
+            {
+                return PlayerPrefs.GetString(AUTH_PREF_KEY);
+            }
+            set
+            {
+                PlayerPrefs.SetString(AUTH_PREF_KEY, value);
+            }
+        }
+
         public void Perform(GameObject obj)
+        {
+            FB.LogInWithReadPermissions(new List<string>() { "public_profile"}, (ILoginResult result) =>
+            {
+                AccessToken = result.AccessToken.TokenString;
+
+                PlayfabFacebookLogin();
+            } );
+        }
+
+        private void PlayfabFacebookLogin()
         {
             LoginWithFacebookRequest request = new LoginWithFacebookRequest
             {
                 AccessToken = AccessToken,
-                AuthenticationToken = "",
                 CreateAccount = createAccount,
                 TitleId = PlayFabSettings.TitleId,
             };
@@ -49,10 +72,12 @@ namespace Assets.Platform.Scripts.Login
             PlayFabClientAPI.LoginWithFacebook(request, OnSuccess, OnFail);
         }
 
-        private void OnSuccess(LoginResult result)
+        private void OnSuccess(PlayFab.ClientModels.LoginResult result)
         {
             this.SessionTicket = result.SessionTicket;
             this.PlayFabId = result.PlayFabId;
+
+            LoginModule.LoginType = LoginTypeEnum.Facebook;
 
             print($"{GetType()} : Successful");
             OnSuccessEvent?.Invoke();
@@ -63,8 +88,6 @@ namespace Assets.Platform.Scripts.Login
             print($"{GetType()} : Failed");
             OnFailEvent?.Invoke(error);
         }
-
-        #region TESTING AND DEBUG
 
         public override void PerformeSetup()
         {
@@ -77,7 +100,5 @@ namespace Assets.Platform.Scripts.Login
             UnityAction<GameObject> action = Perform;
             UnityEventTools.AddObjectPersistentListener(btn.onClick, Perform, gameObject);
         }
-
-        #endregion
     }
 }
