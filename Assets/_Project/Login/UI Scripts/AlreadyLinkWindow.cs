@@ -12,14 +12,37 @@ public class AlreadyLinkWindow : MonoBehaviour
         m_LoginModule = PlatformManager.Instance.loginModule;
     }
 
+    LoginTypeEnum loginType;
+
+    public void Init(LoginTypeEnum loginType)
+    {
+        this.loginType = loginType;
+    }
+
     public void LinkWithCurrent()
     {
-        m_LoginModule.FacebookAuthLink.Login(true);
+        if (loginType == LoginTypeEnum.Facebook)
+        {
+            m_LoginModule.FacebookLinking.Authenticate(true);
+        }
+
+        if (loginType == LoginTypeEnum.PlayServices)
+        {
+            m_LoginModule.PlayServiceLinking.Authenticate(true);
+        }
     }
 
     public void Login()
     {
-        m_LoginModule.FacebookAuth.Login();
+        if (loginType == LoginTypeEnum.Facebook)
+        {
+            m_LoginModule.FacebookLogin.Login();
+        }
+
+        if (loginType == LoginTypeEnum.PlayServices)
+        {
+            m_LoginModule.PlayServiceLogin.Authenticate();
+        }
     }
 
 }

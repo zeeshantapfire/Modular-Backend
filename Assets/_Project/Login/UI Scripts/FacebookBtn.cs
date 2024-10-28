@@ -18,18 +18,16 @@ public class FacebookBtn : MonoBehaviour
 
     private void Start()
     {
-        
         gameObject.SetActive(m_LoginModule.activeFacebook);
     }
 
     private void OnEnable()
     {
-        m_Button.onClick.AddListener(() => m_LoginModule.FacebookAuthLink.Login());
+        m_Button.onClick.AddListener(() => m_LoginModule.FacebookLinking.Authenticate());
     }
-    
 
     private void OnDisable()
     {
-        m_Button.onClick.RemoveListener(() => m_LoginModule.FacebookAuthLink.Login());
+        m_Button.onClick.RemoveListener(() => m_LoginModule.FacebookLinking.Authenticate());
     }
 }

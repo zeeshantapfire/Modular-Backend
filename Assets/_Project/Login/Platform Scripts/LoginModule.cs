@@ -1,14 +1,12 @@
-using System.Collections;
-using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 using Facebook.Unity;
 using System;
-using UnityEngine.Analytics;
+using GooglePlayGames;
+
 
 namespace Assets.Platform.Scripts.Login
 {
-    public enum LoginTypeEnum { Guest = 0, Facebook, Google, GameCenter }
+    public enum LoginTypeEnum { Guest = 0, Facebook, PlayServices, GameCenter }
 
     [Serializable]
     public class LoginModule
@@ -16,12 +14,19 @@ namespace Assets.Platform.Scripts.Login
         #region FIELD DECLERATION
 
         public bool activeFacebook;
-        public bool activeGoogle;
+        public bool activatePlayService;
         public bool activeGameCenter;
 
-        public GuestAuth GuestAuth { get; set; }
-        public FacebookAuth FacebookAuth { get; set; }
-        public FacebookAuthLink FacebookAuthLink { get; set; }
+        public GuestLogin GuestLogin { get; set; }
+
+        public FacebookLogin FacebookLogin { get; set; }
+        public FacebookLinking FacebookLinking { get; set; }
+
+        public PlayServicesLogin PlayServiceLogin { get; set; }
+        public PlayServicesLinking PlayServiceLinking { get; set; }
+
+        public GameCenterLogin GameCenterLogin { get; set; }
+        public GameCenterLinking GameCenterLinking { get; set; }
 
         #endregion
 
@@ -61,7 +66,7 @@ namespace Assets.Platform.Scripts.Login
             {
                 return PlayerPrefs.GetString(ACCESSTOKEN_PREF_KEY, string.Empty);
             }
-            private set
+            set
             {
                 PlayerPrefs.SetString(ACCESSTOKEN_PREF_KEY, value);
             }
@@ -87,33 +92,47 @@ namespace Assets.Platform.Scripts.Login
         public void Init()
         {
             FB.Init();
+            PlayGamesPlatform.Activate();
 
-            GuestAuth = new GuestAuth();
+            GuestLogin = new GuestLogin();
 
             if (activeFacebook)
             {
-                FacebookAuth = new FacebookAuth();
-                FacebookAuthLink = new FacebookAuthLink();
+                FacebookLogin = new FacebookLogin();
+                FacebookLinking = new FacebookLinking();
             }
 
-            
-            Debug.Log($"{PlayerPrefs.GetInt(LOGIN_TYPE_KEY)}");
-            Debug.Log($"{GetType().Name} : {LoginType} Mode");
+            if (activatePlayService)
+            {
+                PlayServiceLogin = new PlayServicesLogin();
+                PlayServiceLinking = new PlayServicesLinking();
+            }
 
+            if (activeGameCenter)
+            {
+                GameCenterLogin = new GameCenterLogin();
+                GameCenterLinking = new GameCenterLinking();
+            }
+
+            PerformInitialLogin();
+        }
+
+        private void PerformInitialLogin()
+        {
             switch (LoginType)
             {
                 case LoginTypeEnum.Facebook:
-                    FacebookAuth.Login();
+                    FacebookLogin.Login();
                     break;
 
-                case LoginTypeEnum.Google:
+                case LoginTypeEnum.PlayServices:
                     break;
 
                 case LoginTypeEnum.GameCenter:
                     break;
 
                 default:
-                    GuestAuth.Login();
+                    GuestLogin.Login();
                     break;
             }
         }

@@ -565,12 +565,12 @@ GameObject:
   - component: {fileID: 383044219}
   - component: {fileID: 383044221}
   m_Layer: 5
-  m_Name: FB Already Linked
+  m_Name: Account Already Linked
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &383044218
 RectTransform:
   m_ObjectHideFlags: 0
@@ -661,7 +661,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &385123702
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1281,13 +1281,14 @@ GameObject:
   - component: {fileID: 759617052}
   - component: {fileID: 759617051}
   - component: {fileID: 759617050}
+  - component: {fileID: 759617053}
   m_Layer: 5
   m_Name: Gamecenter Btn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &759617048
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1303,9 +1304,9 @@ RectTransform:
   - {fileID: 423110373}
   m_Father: {fileID: 1438461865}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 540, y: -1415}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 800, y: 250}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &759617050
@@ -1390,6 +1391,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 759617047}
   m_CullTransparentMesh: 1
+--- !u!114 &759617053
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 759617047}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 635398a5d08b2d34ca09378d2571b0ea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &859477007
 GameObject:
   m_ObjectHideFlags: 0
@@ -1743,13 +1756,14 @@ GameObject:
   - component: {fileID: 1274631220}
   - component: {fileID: 1274631219}
   - component: {fileID: 1274631218}
+  - component: {fileID: 1274631221}
   m_Layer: 5
   m_Name: Google Btn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1274631216
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1765,9 +1779,9 @@ RectTransform:
   - {fileID: 652249908}
   m_Father: {fileID: 1438461865}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 540, y: -959.99994}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 800, y: 250}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1274631218
@@ -1852,6 +1866,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1274631215}
   m_CullTransparentMesh: 1
+--- !u!114 &1274631221
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1274631215}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2e5e3503dd04e274e948629e85b6e5b1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1438461864
 GameObject:
   m_ObjectHideFlags: 0
@@ -1865,7 +1891,7 @@ GameObject:
   - component: {fileID: 1438461867}
   - component: {fileID: 1438461866}
   m_Layer: 5
-  m_Name: Auth Btns
+  m_Name: Login Buttons
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

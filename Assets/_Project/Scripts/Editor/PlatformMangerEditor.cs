@@ -18,6 +18,7 @@ public class PlatformMangerEditor : Editor
             // Draw Login Module
             DrawTitle("Login Module", Color.white);
 
+            EditorGUILayout.LabelField("Login Type", LoginModule.LoginType.ToString());
             EditorGUILayout.LabelField("Guest Key", LoginModule.GuestKey);
             EditorGUILayout.LabelField("Playfab ID", LoginModule.LocalPlayfabId);
             EditorGUILayout.LabelField("Access Token", LoginModule.LocalAccessToken);
@@ -25,7 +26,7 @@ public class PlatformMangerEditor : Editor
             EditorGUILayout.LabelField("", GUI.skin.horizontalSlider);
 
             platformManager.loginModule.activeFacebook = EditorGUILayout.Toggle("Facebook", platformManager.loginModule.activeFacebook);
-            platformManager.loginModule.activeGoogle = EditorGUILayout.Toggle("Google", platformManager.loginModule.activeGoogle);
+            platformManager.loginModule.activatePlayService = EditorGUILayout.Toggle("Google", platformManager.loginModule.activatePlayService);
             platformManager.loginModule.activeGameCenter = EditorGUILayout.Toggle("Game Center", platformManager.loginModule.activeGameCenter);
 
             EditorGUILayout.Space(10);

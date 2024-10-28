@@ -24,7 +24,7 @@ MonoBehaviour:
   status: 1
   xfbml: 0
   frictionlessRequests: 1
-  androidKeystorePath: D:/platform.keystore
+  androidKeystorePath: D:\elitegames.keystore
   iosURLSuffix: 
   appLinkSchemes:
   - list: []
