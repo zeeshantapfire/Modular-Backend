@@ -30,18 +30,28 @@ public class AlreadyLinkWindow : MonoBehaviour
         {
             m_LoginModule.PlayServiceLinking.Authenticate(true);
         }
+
+        if (loginType == LoginTypeEnum.GameCenter)
+        {
+            m_LoginModule.GameCenterLinking.Authenticate(true);
+        }
     }
 
     public void Login()
     {
         if (loginType == LoginTypeEnum.Facebook)
         {
-            m_LoginModule.FacebookLogin.Login();
+            m_LoginModule.FacebookLogin.Authenticate();
         }
 
         if (loginType == LoginTypeEnum.PlayServices)
         {
             m_LoginModule.PlayServiceLogin.Authenticate();
+        }
+
+        if (loginType == LoginTypeEnum.GameCenter)
+        {
+            m_LoginModule.GameCenterLogin.Authenticate();
         }
     }
 

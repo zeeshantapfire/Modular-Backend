@@ -369,6 +369,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8815749306559010785, guid: 778494172463e7f419ad708d0afa207f, type: 3}
+      propertyPath: loginModule.activeGameCenter
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8815749306559010785, guid: 778494172463e7f419ad708d0afa207f, type: 3}
       propertyPath: loginModule.activatePlayService
       value: 1
       objectReference: {fileID: 0}

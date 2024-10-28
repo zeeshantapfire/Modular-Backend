@@ -122,7 +122,7 @@ namespace Assets.Platform.Scripts.Login
             switch (LoginType)
             {
                 case LoginTypeEnum.Facebook:
-                    FacebookLogin.Login();
+                    FacebookLogin.Authenticate();
                     break;
 
                 case LoginTypeEnum.PlayServices:

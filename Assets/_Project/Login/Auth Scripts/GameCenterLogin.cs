@@ -10,7 +10,7 @@ namespace Assets.Platform.Scripts.Login
         public static event Action OnSuccess;
         public static event Action<PlayFabError> OnFail;
 
-        public void Login()
+        public void Authenticate()
         {
             LoginWithGameCenterRequest request = new LoginWithGameCenterRequest
             {

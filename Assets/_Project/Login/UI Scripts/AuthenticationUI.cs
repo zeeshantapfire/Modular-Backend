@@ -19,11 +19,15 @@ public class AuthenticationUI : MonoBehaviour
     {
         FacebookLinking.OnSuccess += FacebookLinkSuccess;
         FacebookLinking.OnAlreadyLinked += FacebookAlreadyExit;
+        FacebookLinking.OnFail += FacebookLinkFail;
 
         PlayServicesLinking.OnSuccess += PlayServiceLinkSuccess;
+        PlayServicesLinking.OnAlreadyLinked += PlayServiceAccountAlreadyExit;
         PlayServicesLinking.OnFail += PlayServiceLinkFail;
 
-        FacebookLinking.OnFail += FacebookLinkFail;
+        GameCenterLinking.OnSuccess += GameCenterLinkSuccess;
+        GameCenterLinking.OnAlreadyLinked += GameCenterAccountAlreadyExit;
+        GameCenterLinking.OnFail += GameCenterLinkFail;
     }
 
     #region FACEBOOK CALLBACKS
@@ -70,15 +74,41 @@ public class AuthenticationUI : MonoBehaviour
 
     #endregion
 
+    #region GAMECENTER CALLBACKS
+
+    private void GameCenterLinkSuccess()
+    {
+        Debug.Log(LoginModule.LoginType);
+        Debug.Log($"{GetType()} : Facebook Linking Sucessful");
+    }
+
+    private void GameCenterAccountAlreadyExit()
+    {
+        Debug.Log($"{GetType()} : Facebook Linking Already Linked");
+        alreadyLinkWindow.Init(LoginTypeEnum.PlayServices);
+        alreadyLinkWindow.gameObject.SetActive(true);
+    }
+
+    private void GameCenterLinkFail(PlayFabError error)
+    {
+        Debug.Log($"{GetType()} : Facebook Linking Failed {error.Error}");
+    }
+
+    #endregion
+
     private void OnDisable()
     {
         FacebookLinking.OnSuccess -= FacebookLinkSuccess;
         FacebookLinking.OnAlreadyLinked -= FacebookAlreadyExit;
+        FacebookLinking.OnFail -= FacebookLinkFail;
 
         PlayServicesLinking.OnSuccess -= PlayServiceLinkSuccess;
+        PlayServicesLinking.OnAlreadyLinked -= PlayServiceAccountAlreadyExit;
         PlayServicesLinking.OnFail -= PlayServiceLinkFail;
 
-        FacebookLinking.OnFail -= FacebookLinkFail;
+        GameCenterLinking.OnSuccess -= GameCenterLinkSuccess;
+        GameCenterLinking.OnAlreadyLinked -= GameCenterAccountAlreadyExit;
+        GameCenterLinking.OnFail -= GameCenterLinkFail;
     }
 
 }
