@@ -1,3 +1,4 @@
+using Assets.Platform.Scripts.Login;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
@@ -12,25 +13,33 @@ public class PlatformMangerEditor : Editor
 
         #region LOGIN MODULE
 
-        if (ReferenceEquals(platformManager.loginModule, null))
+        if (platformManager.isLoginSystemActive)
         {
-            if (GUILayout.Button("Add Login Module"))
+            // Draw Login Module
+            DrawTitle("Login Module", Color.white);
+
+            EditorGUILayout.LabelField("Guest Key", LoginModule.GuestKey);
+            EditorGUILayout.LabelField("Playfab ID", LoginModule.LocalPlayfabId);
+            EditorGUILayout.LabelField("Access Token", LoginModule.LocalAccessToken);
+
+            EditorGUILayout.LabelField("", GUI.skin.horizontalSlider);
+
+            platformManager.loginModule.activeFacebook = EditorGUILayout.Toggle("Facebook", platformManager.loginModule.activeFacebook);
+            platformManager.loginModule.activeGoogle = EditorGUILayout.Toggle("Google", platformManager.loginModule.activeGoogle);
+            platformManager.loginModule.activeGameCenter = EditorGUILayout.Toggle("Game Center", platformManager.loginModule.activeGameCenter);
+
+            EditorGUILayout.Space(10);
+
+            if (GUILayout.Button("Remove Login Module"))
             {
-                platformManager.InitLoginModule();
+                platformManager.ToggleLoginModule(false);
             }
         }
         else
         {
-            // Draw Login Module
-            DrawTitle("Login Module",Color.white);
-            platformManager.loginModule.guest = EditorGUILayout.Toggle("Guest Login", platformManager.loginModule.guest);
-            platformManager.loginModule.facebook = EditorGUILayout.Toggle("Facebook Login", platformManager.loginModule.facebook);
-            platformManager.loginModule.google = EditorGUILayout.Toggle("Google Login", platformManager.loginModule.google);
-            platformManager.loginModule.gameCenter = EditorGUILayout.Toggle("Game Center Login", platformManager.loginModule.gameCenter);
-
-            if (GUILayout.Button("Remove Login Module"))
+            if (GUILayout.Button("Add Login Module"))
             {
-                platformManager.InitLoginModule(false);
+                platformManager.ToggleLoginModule(true);
             }
         }
 
